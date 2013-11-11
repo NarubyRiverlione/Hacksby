@@ -11,6 +11,7 @@ BEGIN {
 }
 
 use Furby::Audio;
+use Furby::Command;
 
 if ($^O eq 'MSWin32') {
     require Win32::Sound;
@@ -44,11 +45,17 @@ if ($number < $min_number or $number > $max_number) {
 if (!$interactive) {
     Furby::Audio::generate_wav($number, $filename);
     play_wav($filename);
+    my $description = Furby::Command::description($number);
+    print "\n($number) $description\n\n";
+
 } else {
     while ($number <= $max_number) {
         Furby::Audio::generate_wav($number, $filename);
-        print "Command $number ... ";
+        #print "Command $number ... ";
         play_wav($filename);
+        my $description = Furby::Command::description($number);
+        print "\n($number) $description\n\n";
+
         if ($number == $max_number) {
             print "Done\n";
             last;
@@ -65,18 +72,21 @@ if (!$interactive) {
     }
 }
 
+
 sub play_wav {
     my ($filename) = @_;
 
     my $command = 'aplay'; # assube we're on some Linux desktop flavor
 
-    if ($^O eq 'MacOS') {
+    if ($^O eq 'darwin') {
         $command = 'afplay';
     }
 
     if ($^O eq 'MSWin32') {
         $command = '"'.catfile(dirname(rel2abs($0)), 'win32/dsplay.exe').'"';
     }
-
+#    print "$^O = $command\n";
     system("$command $filename");
+	
+                    
 }

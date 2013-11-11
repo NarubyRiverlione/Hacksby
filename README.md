@@ -152,9 +152,9 @@ play the next command in the range, or input a command number to play, or input 
 evaluate to a number (for example, `r`) to repeat the last command. This mode will allow you to explore the
 Furby reactions to different commands.
 
-The generated WAV file is saved as `out.wav` in the current directory. Under Windows, the playback is performed
-using the provided command-line utility (`bin/win32/dsplay.exe`). Under Unix / Mac, an attempt to use
-already existing console players is used (but not tested).
+The generated WAV file is saved as `out.wav` in the current directory. 
+Under Windows, the playback is performed using the provided command-line utility (`bin/win32/dsplay.exe`). 
+Under Unix / Mac, an attempt to use already existing console players is used (tested for Mac).
 
 
 ### Listen and Decode Furby Commands
